@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Yoeri on 7-1-2018.
  */
-public class PhaseRPS implements IPeetPhase {
+public class PhaseFirst implements IPhase {
 
     private final Scanner m_reader;
 
@@ -19,7 +19,7 @@ public class PhaseRPS implements IPeetPhase {
     @Nullable
     private RPSType m_consumerType;
 
-    public PhaseRPS(Scanner reader) {
+    public PhaseFirst(Scanner reader) {
         m_reader = reader;
     }
 

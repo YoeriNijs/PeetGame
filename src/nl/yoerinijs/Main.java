@@ -1,7 +1,7 @@
 package nl.yoerinijs;
 
-import nl.yoerinijs.phases.PhaseInitialSteps;
-import nl.yoerinijs.phases.PhaseRPS;
+import nl.yoerinijs.phases.PhaseSecond;
+import nl.yoerinijs.phases.PhaseFirst;
 
 import java.util.Scanner;
 
@@ -17,22 +17,26 @@ public class Main {
         askForGameMode(reader);
 
         // Start rock, paper and scissors
-        PhaseRPS firstPhase = new PhaseRPS(reader);
-        while(!firstPhase.isValid()) {
-            firstPhase.initialize();
-            firstPhase.execute();
+        PhaseFirst first = new PhaseFirst(reader);
+        while(!first.isValid()) {
+            first.initialize();
+            first.execute();
         }
 
-        PhaseInitialSteps secondPhase = new PhaseInitialSteps(m_isHard, firstPhase.doesConsumerStart());
-        while(!secondPhase.isValid()) {
-            secondPhase.initialize();
-            secondPhase.execute();
+        // Draw board and create initial setup
+        PhaseSecond second = new PhaseSecond(m_isHard, first.doesConsumerStart());
+        while(!second.isValid()) {
+            second.initialize();
+            second.execute();
         }
-//        System.out.print(firstPhase.doesConsumerStart());
 
         reader.close();
     }
 
+    /**
+     * Handles game mode setting.
+     * @param reader
+     */
     private static void askForGameMode(Scanner reader) {
         System.out.println("Do you prefer hard gameplay? (y/n) ");
         String answer = reader.next();
