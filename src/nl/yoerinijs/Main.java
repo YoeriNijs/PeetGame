@@ -1,7 +1,9 @@
 package nl.yoerinijs;
 
+import nl.yoerinijs.phases.IPhase;
 import nl.yoerinijs.phases.PhaseSecond;
 import nl.yoerinijs.phases.PhaseFirst;
+import nl.yoerinijs.phases.PhaseThird;
 
 import java.util.Scanner;
 
@@ -18,19 +20,27 @@ public class Main {
 
         // Start rock, paper and scissors
         PhaseFirst first = new PhaseFirst(reader);
-        while(!first.isValid()) {
-            first.initialize();
-            first.execute();
-        }
+        executePhase(first);
 
         // Draw board and create initial setup
         PhaseSecond second = new PhaseSecond(m_isHard, first.doesConsumerStart());
-        while(!second.isValid()) {
-            second.initialize();
-            second.execute();
-        }
+        executePhase(second);
+
+        // Three in a row...
+        PhaseThird third = new PhaseThird();
+        executePhase(third);
+
+        System.out.println("WINNER: " + (third.isConsumerWinner() ? "YOU \0/" : "COMPUTER :'("));
 
         reader.close();
+    }
+
+    private static void executePhase(IPhase phase) {
+        System.out.println(phase.getPhaseName());
+        do {
+            phase.initialize();
+            phase.execute();
+        } while(!phase.isValid());
     }
 
     /**

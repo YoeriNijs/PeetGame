@@ -5,6 +5,8 @@ package nl.yoerinijs.phases;
  */
 public interface IPhase {
 
+    String getPhaseName();
+
     void initialize();
 
     void execute();

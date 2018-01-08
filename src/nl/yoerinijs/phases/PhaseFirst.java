@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
  */
 public class PhaseFirst implements IPhase {
 
+    private static final String PHASE_NAME = "WHO STARTS? ROCK, PAPER, SCISSORS...";
+
     private final Scanner m_reader;
 
     @Nullable
@@ -21,6 +23,11 @@ public class PhaseFirst implements IPhase {
 
     public PhaseFirst(Scanner reader) {
         m_reader = reader;
+    }
+
+    @Override
+    public String getPhaseName() {
+        return PHASE_NAME;
     }
 
     @Override
